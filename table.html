@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Sıra No</th>
+                <th>Şehir</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in Sehirler | orderBy">
+                <td ng-if="$odd" style="background-color: rgb(231, 165, 176);">{{$index+1}}</td>
+                <td ng-if="$even">{{$index+1}}</td>
+                <td ng-if="$odd" style="background-color: rgb(231, 165, 176);">{{item | uppercase}}</td>
+                <td ng-if="$even">{{item | uppercase}}</td>
+                <!-- <td ng-if="$odd" style="background-color: rgb(231, 165, 176);"></td> -->
+            </tr>
+         
+        </tbody>
+    </table>
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            $scope.Sehirler=["istanbul","Ankara","Mersin","Sivas","Malatya"]
+        })
+    </script>
+    
+</body>
+</html>

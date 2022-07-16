@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    <p>Data:    {{Message.data}}</p>
+    <p>Status:    {{Message.status}}</p>
+    <p>xhrStatus:    {{Message.xhrStatus}}</p>
+    <p>Url:    {{Message.config.url}}</p>
+
+    <input type="text" ng-model="reguestId">
+    <button ng-click="getUserInfo(reguestId)">Çağır</button>
+ 
+
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope,$http) {
+            $scope.reguestId=1;
+            // $http.get("https://jsonplaceholder.typicode.com/todos/12").then((result) => {
+            //     $scope.Message=result
+            //     console.log(result);
+            // })
+            $scope.getUserInfo=function (userId) {
+                $http.get("https://jsonplaceholder.typicode.com/todos/"+`${userId}`).then((result) => {
+                $scope.Message=result
+                console.log(result);
+            })
+            }
+        })
+    </script>
+    
+</body>
+</html>

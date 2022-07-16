@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <input type="number" ng-model="price">
+        <input type="number" ng-model="quantity">
+        <p>Toplam tutar: {{price*quantity}}</p>
+        <br>
+        <h1>Repeat</h1>
+        <br>
+        <select>
+            <option ng-repeat="num in Numbers">{{num}}</option>
+        </select>
+        <ul>
+            <li ng-repeat="num in Numbers">{{num}}</li>
+        </ul>
+    </div>
+
+    <script src="/module/app.js"></script>
+    <script src="/module/controller.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    {{message}} <hr>
+    {{DeleyedText}} <hr>
+    {{DateNow}} <hr>
+    service kullanarak kullanım
+    <input type="number" ng-model="number"> {{HexadecimalNumber}} <hr> 
+    filter kullanrak kullanım
+    <input type="number" ng-model="number2"> {{number2 | mySpecial}} <hr> 
+    birden fazla veriyi filte ile hex değere çevirdik
+    <ul>
+        <li ng-repeat="item in numbers">{{item | mySpecial}}</li>
+    </ul>
+    <hr>
+    Filter içerisinde service kullanımı
+    <p>{{255 | serviceInFilter}}</p>
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope,$location,$http,$timeout,$interval,hex) {
+            $scope.message=$location.absUrl(); 
+            $http.get("https://jsonplaceholder.typicode.com/todos/1").then(function(response){
+                $scope.message=response.data;
+            })
+            $timeout(function () {//sayfa yüklendikten sonra süre dolunca çalışır
+                $scope.DeleyedText="gecikmeli gelen yazı(Timeout kullanıldı!)"
+            },3000)
+            $scope.DateNow=new Date().toLocaleTimeString();
+            $interval(function () { //timeout un aksine devamlı kendini yeniler 
+                $scope.DateNow=new Date().toLocaleTimeString();
+            },1000)
+             $scope.number=1;
+             $interval(function () {
+                $scope.HexadecimalNumber=hex.specialFunction($scope.number);
+             })
+             $scope.number2=1;
+             $scope.numbers=[1,255,265,845];
+    
+        })
+        app.service("hex",function () {
+            this.specialFunction=function (par) {
+                return par.toString(16);
+            }
+        });
+        app.filter("mySpecial",function ($interval) {
+         return  function(par) {
+    
+              return  par.toString(16)
+            }
+        })
+        app.filter("serviceInFilter",["hex",function (hex) {
+            return function (x) {
+                return hex.specialFunction(x);
+            }
+        }])
+    </script>
+    
+</body>
+</html>

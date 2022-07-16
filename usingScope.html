@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp">
+    <h1>{{color}}</h1> <!-- genel scope -->
+    <div ng-controller="deneme" > <!-- controller içerisinde tanımllı scop -->
+        {{color}}
+    </div>
+    <h1 ng-controller="deneme2">{{color}}</h1> <!-- controller içerisinde tanımlanması gerekir -->
+    {{color}} <!-- genel scope -->
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("deneme",function ($scope) {
+            $scope.color="red"
+        })
+        app.controller("deneme2",function ($scope) {
+            $scope.color="red"
+        })
+        app.run(function ($rootScope) {
+            $rootScope.color="black"
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,103 @@
+<div ng-app="myApp" ng-controller="myCtrl">
+
+First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br>
+<br>
+Full Name: {{firstName + " " + lastName}}
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+});
+</script>
+
+controller sayesinde sayfa içerisindeki verilere eriştik ve ilk değer atamalarını yaptık
+-------------------------------------------------------
+ <div ng-app="myApp" ng-controller="myController">
+    <input type="text" style="background-color: {{myColor}}" ng-model="myColor">
+    <p>Toplam tutar: {{a*b}}</p>
+    <p ng-bind="a*b"></p>
+    <h1>Adınız:{{person.name+" "+person.surname}}</h1>
+    </div>
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myController",function ($scope) {
+            $scope.myColor='yellow';
+            $scope.a=5;
+            $scope.b=6;
+            $scope.person={name:"recep",surname:"celimli"}
+        })
+    </script>
+
+    still ataması gerçekleştirirkende aynı işlemlere tabi tuttuk
+    -----------------------------------
+    liste halinde repeat kullanarak veri yazma
+      $scope.Numbers=[1,2,3,4,5,6]
+        <select>
+            <option ng-repeat="num in Numbers">{{num}}</option>
+        </select>
+        <ul>
+            <li ng-repeat="num in Numbers">{{num}}</li>
+        </ul>
+        nesne tanımlanmış olsaydı num.nesneelemanı
+        --------------------------------------------------------
+        kendi directivelerini oluşturken isimlendirme şu şekilde olması gerekmektedir
+         <!-- element -->
+    <test-directive></test-directive>
+    <!-- attribute -->
+    <div test-directive></div>
+    <!-- class -->
+    <div class="withClass"></div>
+    <!-- directive:comment-directive -->
+    <div></div>
+    <script>
+        var app=angular.module("myApp",[]);
+        app.directive("testDirective",function () {
+            return {template:" <h3>element ve atribute olarak çağırma</h3>  "}
+        });
+        app.directive("withClass",function () {
+           
+            return { restrict:"C",template:" <h3>Class olarak deneme ön şart olarak restrict ile class kullanılacağı belirtilmelidir</h3>  "}
+        });
+        app.directive("commentDirective",function () {
+            return{
+                restrict:"M",//sınırlamalar gerekli şartlar sağlandığında çalışacak
+                //E:Element A: atribute C: class M:comment varsayılan olarak EA dır element  ve atribute ler ile çalışır
+                replace:true,
+                template:"<h3>Yorum satırı olan bir tagi görünür hale getirmiş oluyoruz</h3>"
+            }
+            
+        })
+    </script>
+    -------------------------------------------------------------
+    validation işlemleri için kullanılan show metoduna örnek
+    <form ng-app="" name="myFrm">
+    <p>Adınız: <input type="email" name="userEmail" ng-model="ePosta" required></p>
+    <span style="color: red;" ng-show="myFrm.userEmail.$error.email">Bu e-posta adresi geçerli değil!</span>
+    <span style="color: blue;" ng-show="myFrm.userEmail.$error.required">Bu alan boş geçilemez</span>
+</form>
+--------------------
+taglara verileri bağlamak için expression ng-bind ng-model(input)
+--------------------------------------------
+ {{message}}
+    {{DeleyedText}}
+    {{DateNow}}
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope,$location,$http,$timeout,$interval) {
+            $scope.message=$location.absUrl(); //sayda url ini çektik
+            $http.get("https://jsonplaceholder.typicode.com/todos/1").then(function(response){
+                $scope.message=response.data;
+            })
+            $timeout(function () {//sayfa yüklendikten sonra süre dolunca çalışır
+                $scope.DeleyedText="gecikmeli gelen yazı(Timeout kullanıldı!)"
+            },3000)
+            $scope.DateNow=new Date().toLocaleTimeString();
+            $interval(function () { //timeout un aksine devamlı kendini yeniler 
+                $scope.DateNow=new Date().toLocaleTimeString();
+            },1000)
+        })
+
+ location parametresi ile js deki window location görevini görür       

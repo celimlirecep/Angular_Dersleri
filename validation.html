@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input.ng-invalid{ 
+            border : 2px solid red;
+        }
+        input.ng-valid{ 
+            border : 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div  >
+
+<form ng-app="myApp" name="myFrm" ng-controller="myController">
+    <p>Adınız: <input type="email" name="userEmail" ng-model="ePosta" required></p>
+    <span style="color: red;" ng-show="myFrm.userEmail.$error.email">Bu e-posta adresi geçerli değil!</span>
+    <span style="color: blue;" ng-show="myFrm.userEmail.$error.required">Bu alan boş geçilemez</span>
+    <span style="color: green;">Valid: {{myFrm.userEmail.$valid}}</span> <!-- geçerlimi -->
+    <span style="color: green;">Touched: {{myFrm.userEmail.$touched}}</span> <!-- o bölgeye giriş yapı ayrılınca true olur -->
+    <span style="color: green;">Dirty: {{myFrm.userEmail.$dirty}}</span> <!-- değişikliğe uğradımı -->
+</form>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myController",function ($scope) {
+        $scope.ePosta="receply13@hotmail.com"
+    })
+</script>
+
+    </div>
+    
+</body>
+</html>

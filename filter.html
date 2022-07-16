@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    <p>  Ücret: {{(price | number:2) + "₺"}}</p>
+    <p>Tarih:{{today | date}}</p>
+    <p>NameUpper:{{name | uppercase}}</p>
+    <p>NameLower:{{name | lowercase}}</p>
+    <p>Number:{{Number | number}}</p> <!-- sayıyı string formata dönüştürür -->
+    <pre>Json Format:{{infoPerson | json}}</pre>
+    <p>Karakter sınırlama: {{Limitting | limitTo:63}}</p>
+    <p>Dizi içerisinde filtreleme:</p>
+    <p ng-repeat="item in liste | limitTo:2">{{item}}</p>
+    <p>Sondan 2 tane:</p>
+    <p ng-repeat="item in liste | limitTo:-2">{{item}}</p>
+    <ul>
+        <li>Küçükten büyüğe sıralama</li>
+        <li ng-repeat="item in OrderringList | orderBy: 'age'">{{item.name}}</li>
+    </ul>
+
+    <hr>
+    <p>Aramak istedğiniz kelimeyi giriniz: <input type="text" ng-model="search"></p>
+    <table border="2">
+        <thead>
+            <tr>
+                <th ng-click="orderMe('name')">Name(Sıralamak için tıkla) </th>
+                <th ng-click="orderMe('age')">Age(Sıralamak için tıkla)</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="item in OrderringList | orderBy:myOrder | filter:search"> <!-- fonksiyonu döndürüyim çağrıyım deme olmuyo 2 kere yazıyo sonuncu undefined dönüyor -->
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <h1>Metni Url formatına çevirme</h1>
+    <p>Lütfen URL formatına çevirmek istedğiniz metni giriniz: <input type="text" ng-model="url"></p>
+    <p>{{url | myUrlFormat}}</p>
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            $scope.price=15000;
+           $scope.today = new Date().toISOString().slice(0, 10);
+           $scope.name="recep celimli";
+           $scope.Number=16;
+           $scope.infoPerson={
+            name: "recep",
+            surname:"Celimli",
+            age:23
+           }
+           $scope.Limitting="belirli sayıda karaktere izin verilmesini sağlayan propertydir,belirli sayıda karaktere izin verilmesini sağlayan propertydir,"
+           $scope.liste=[1,2,3,4,5,6,];
+           $scope.OrderringList=[
+            {name:"recep",age:16},
+            {name:"Veli",age:13},
+            {name:"hayriye",age:14},
+            {name:"kazım",age:12}
+           ];
+           
+           $scope.orderMe=function (item) {
+            console.log(item);
+                return $scope.myOrder=item;
+           }
+           $scope.search="";
+           $scope.url="";
+
+        })
+        app.filter("myUrlFormat",function () {
+            return function (url) {
+                let lowerKey=url.toLowerCase();
+            let spaceReplace=lowerKey.replaceAll(' ', '-');
+            spaceReplace=spaceReplace.replaceAll('ç', 'c');
+            spaceReplace=spaceReplace.replaceAll('ğ', 'g');
+            spaceReplace=spaceReplace.replaceAll('ş', 's');
+            spaceReplace=spaceReplace.replaceAll('ı', 'i');
+            spaceReplace=spaceReplace.replaceAll('ö', 'o');
+            spaceReplace=spaceReplace.replaceAll('ü', 'u');
+            spaceReplace=spaceReplace.replaceAll('.', '-');
+            spaceReplace=spaceReplace.replaceAll('?', '-');
+            return spaceReplace;
+            }
+       
+        })
+    </script>
+    
+</body>
+</html>

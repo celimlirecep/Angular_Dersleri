@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    <!-- ng-blur:  <br>
+    ng-change:  <br>
+    ng-click:  <br>
+    ng-copy:  <br>
+    ng-cut:  <br>
+    ng-dblclick:  <br>
+    ng-focus:  <br>
+    ng-keydown:  <br>
+    ng-keypress="fn()":  <br>
+    ng-keyup="fn()":  <br>
+    ng-mousedown="fn()":  <br>
+    ng-mouseenter="fn()":  <br>
+    ng-mouseleave="fnfnfn()":  <br>
+    ng-mousemove="fn()"="fnfnfn()":  <br>
+    ng-mouseover="fn()"="fnfnfn()":  <br>
+    ng-mouseup="fn()"="fn()"="fnfnfn()":  <br>
+    ng-paste="fn()"="fnfnfn()":  <br> -->
+
+        <div style="color:chartreuse ; width:50px;height:50px; background-color: brown; " ng-mouseover="deneme1()">
+            Tıkla gezdir
+        </div> {{count1}}
+        <br>
+        <hr>
+        <div style="color:white ; width:50px;height:50px; background-color: black;" ng-click="count2=count2+1">
+       Tıkla
+        </div>
+        {{count2}} <br> <hr>
+        <div style=" width:500px;height:500px; background-color: blue;" ng-mousemove="myLocation($event)">
+
+        </div >
+        <h3> Farenin bulunduğu kordinatlar:  {{x}} X ekseni {{y}} Y ekseni</h3>
+        <div>
+            toogle kullanımı
+            <button  ng-click="isShow()">Toogle</button>
+            <h3 ng-show="toogle2">Göster sakla</h3>
+        </div>
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            $scope.count1=0;
+            $scope.count2=0;
+            $scope.deneme1=function () {
+                $scope.count1+=1;
+            };
+
+            $scope.myLocation=function(value){
+                $scope.x=value.clientX;
+                $scope.y=value.clientY;
+            }
+            $scope.toogle2=true;
+            $scope.isShow=function(){
+                $scope.toogle2=!$scope.toogle2;
+            }
+        })
+    </script>
+    
+</body>
+</html>

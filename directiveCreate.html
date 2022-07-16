@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Document</title>
+</head>
+<body ng-app="myApp">
+    <!-- element -->
+    <test-directive></test-directive>
+    <!-- attribute -->
+    <div test-directive></div>
+    <!-- class -->
+    <div class="withClass"></div>
+    <!-- directive:comment-directive -->
+    <div></div>
+    <script>
+        var app=angular.module("myApp",[]);
+        app.directive("testDirective",function () {
+            return {template:" <h3>element ve atribute olarak çağırma</h3>  "}
+        });
+        app.directive("withClass",function () {
+           
+            return { restrict:"C",template:" <h3>Class olarak deneme ön şart olarak restrict ile class kullanılacağı belirtilmelidir</h3>  "}
+        });
+        app.directive("commentDirective",function () {
+            return{
+                restrict:"M",//sınırlamalar gerekli şartlar sağlandığında çalışacak
+                //E:Element A: atribute C: class M:comment varsayılan olarak EA dır element  ve atribute ler ile çalışır
+                replace:true,
+                template:"<h3>Yorum satırı olan bir tagi görünür hale getirmiş oluyoruz</h3>"
+            }
+            
+        })
+    </script>
+    
+</body>
+</html>

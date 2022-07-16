@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    <select ng-model="slcName" ng-options="x.name for x in Ogrenci"></select>
+    Ögrenci Id:{{slcName.id}}
+    Ögrenci Adı:{{slcName.name}}
+    <hr>
+    <select ng-model="slcOgrenci">
+        <option ng-repeat="item in Ogrenci" ng-value="{{item.id}}">{{item.name}}</option>
+    </select>
+    Seçilen öğrenci Id si:{{slcOgrenci}}
+    <hr><br>
+    seçilen özelliklere göre sadece o veilerin getirilmesi
+    <select ng-model="slcCar" ng-options="x for (x,y) in cars"></select> <br>
+    <h2>{{slcCar}} </h2>
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            $scope.Sehirler=["istanbul","Ankara","Mersin","Sivas","Malatya"]
+            $scope.Ogrenci=[
+                {id:1,name:"Recep"},
+                {id:2,name:"Kazım"},
+                {id:3,name:"Aras"},
+            ];
+            $scope.cars={
+                modeli:"Tofaş",
+                fiyati:268000,
+                renk:"kırmızı",
+                ozellikler:"hareket eder"
+            }
+        })
+    </script>
+    
+</body>
+</html>

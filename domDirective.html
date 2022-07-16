@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    pasif hale getirir butonu (ng-disabled)
+    <button ng-disabled="result">Click Me</button> <br>
+    <input type="checkbox" ng-model="result"> Change my status <br>
+    Status:{{result}}
+    <br>
+    <p ng-show="sayi>5">Sayi 5 ten büyüktür</p>
+    <p ng-hide="sayi==1205">Sayi 1205 e eşit deilse gizlenmez</p>
+    
+    <input type="checkbox" ng-if="deneme" checked>
+    <input type="checkbox" ng-if="!deneme" >
+
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            $scope.deneme=true;
+            $scope.sayi=88;
+        })
+    </script>
+    
+</body>
+</html>
