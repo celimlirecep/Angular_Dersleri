@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    <a href="#/!">Ana sayfa</a>
+    <a href="#!red">Kırmızı sayfa</a>
+    <a href="#!green">Yesil sayfa</a>
+    <!-- ng-view atribute ile bu sayfaları bana yüklicek -->
+    <div ng-view></div>
+
+
+    <script>
+        var app=angular.module("myApp",["ngRoute"]);
+        app.controller("myCont",function ($scope) {
+            
+        });
+        app.config(["$routeProvider",function ($routeProvider) {
+    $routeProvider
+    .when("/home",{templateUrl:"main.html"})
+    .when("/red",{templateUrl:"red.html"})
+    .when("/green",{templateUrl:"green.html"});
+    
+}]);
+    </script>
+    <script src="/Route/config.js"></script>
+    
+</body>
+</html>

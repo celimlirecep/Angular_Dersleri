@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCont">
+    
+    <form >
+        <input type="radio" ng-model="showRadio" value="html">Html
+        <input type="radio" ng-model="showRadio" value="css">css
+        <input type="radio" ng-model="showRadio" value="react">react
+        <input type="radio" ng-model="showRadio" value="angular">angular
+    </form>
+    <div ng-switch="showRadio">
+        <div ng-switch-when="html">
+            html seçildi
+        </div>
+        <div ng-switch-when="css">
+            css seçildi
+        </div>
+        <div ng-switch-when="react">
+            react seçildi
+        </div>
+        <div ng-switch-when="angular">
+            angular seçildi
+        </div>
+    </div>
+
+
+    <script>
+        var app=angular.module("myApp",[]);
+        app.controller("myCont",function ($scope) {
+            
+        })
+    </script>
+    
+</body>
+</html>
